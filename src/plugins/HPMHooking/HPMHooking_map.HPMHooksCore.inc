@@ -6096,8 +6096,6 @@ struct {
 	struct HPMHookPoint *HP_skill_attack_display_unknown_post;
 	struct HPMHookPoint *HP_skill_attack_copy_unknown_pre;
 	struct HPMHookPoint *HP_skill_attack_copy_unknown_post;
-	struct HPMHookPoint *HP_skill_attack_dir_unknown_pre;
-	struct HPMHookPoint *HP_skill_attack_dir_unknown_post;
 	struct HPMHookPoint *HP_skill_attack_blow_unknown_pre;
 	struct HPMHookPoint *HP_skill_attack_blow_unknown_post;
 	struct HPMHookPoint *HP_skill_attack_post_unknown_pre;
@@ -6786,6 +6784,8 @@ struct {
 	struct HPMHookPoint *HP_unit_blown_post;
 	struct HPMHookPoint *HP_unit_warp_pre;
 	struct HPMHookPoint *HP_unit_warp_post;
+	struct HPMHookPoint *HP_unit_warpto_master_pre;
+	struct HPMHookPoint *HP_unit_warpto_master_post;
 	struct HPMHookPoint *HP_unit_stop_walking_pre;
 	struct HPMHookPoint *HP_unit_stop_walking_post;
 	struct HPMHookPoint *HP_unit_skilluse_id_pre;
@@ -12933,8 +12933,6 @@ struct {
 	int HP_skill_attack_display_unknown_post;
 	int HP_skill_attack_copy_unknown_pre;
 	int HP_skill_attack_copy_unknown_post;
-	int HP_skill_attack_dir_unknown_pre;
-	int HP_skill_attack_dir_unknown_post;
 	int HP_skill_attack_blow_unknown_pre;
 	int HP_skill_attack_blow_unknown_post;
 	int HP_skill_attack_post_unknown_pre;
@@ -13623,6 +13621,8 @@ struct {
 	int HP_unit_blown_post;
 	int HP_unit_warp_pre;
 	int HP_unit_warp_post;
+	int HP_unit_warpto_master_pre;
+	int HP_unit_warpto_master_post;
 	int HP_unit_stop_walking_pre;
 	int HP_unit_stop_walking_post;
 	int HP_unit_skilluse_id_pre;
