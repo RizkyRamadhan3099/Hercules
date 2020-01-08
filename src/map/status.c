@@ -12858,7 +12858,7 @@ static int status_natural_heal(struct block_list *bl, va_list args)
 		sregen = regen->sitting;
 		if ((flag & RGN_SHP) != 0) {
 			//Sitting HP regen
-			int tick = battle_config.natural_heal_skill_interval * sregen->rate.hp / 100;
+			int tick = max(battle_config.natural_heal_cap, battle_config.natural_heal_skill_interval * sregen->rate.hp / 100);
 			sregen->tick.hp += status->natural_heal_diff_tick;
 
 			if (regen->state.overweight != 0)
@@ -12874,7 +12874,7 @@ static int status_natural_heal(struct block_list *bl, va_list args)
 		}
 		if ((flag & RGN_SSP) != 0) {
 			//Sitting SP regen
-			int tick = battle_config.natural_heal_skill_interval * sregen->rate.sp / 100;
+			int tick = max(battle_config.natural_heal_cap, battle_config.natural_heal_skill_interval * sregen->rate.sp / 100);
 			sregen->tick.sp += status->natural_heal_diff_tick;
 
 			if (regen->state.overweight != 0)
@@ -12924,24 +12924,28 @@ static int status_natural_heal(struct block_list *bl, va_list args)
 
 	int hp_interval = battle_config.natural_healhp_interval;
 	int sp_interval = battle_config.natural_healsp_interval;
+	int interval_cap = battle_config.natural_heal_cap;
 	switch (bl->type) { //PC objects uses the default heal intervals provided above
 	case BL_HOM:
 		hp_interval = battle_config.hom_natural_heal_hp;
 		sp_interval = battle_config.hom_natural_heal_sp;
+		interval_cap = battle_config.hom_natural_heal_cap;
 		break;
 	case BL_MER:
 		hp_interval = battle_config.merc_natural_heal_hp;
 		sp_interval = battle_config.merc_natural_heal_sp;
+		interval_cap = battle_config.merc_natural_heal_cap;
 		break;
 	case BL_ELEM:
 		hp_interval = battle_config.elem_natural_heal_hp;
 		sp_interval = battle_config.elem_natural_heal_sp;
+		interval_cap = battle_config.elem_natural_heal_cap;
 		break;
 	}
 
 	//Natural Hp regen
 	if ((flag & RGN_HP) != 0) {
-		int tick = hp_interval * hp_bonus / 100;
+		int tick = max(interval_cap, hp_interval * hp_bonus / 100);
 		regen->tick.hp += status->natural_heal_diff_tick;
 
 		if (ud != NULL && ud->walktimer != INVALID_TIMER)
@@ -12961,7 +12965,7 @@ static int status_natural_heal(struct block_list *bl, va_list args)
 
 	//Natural SP regen
 	if ((flag & RGN_SP) != 0) {
-		int tick = sp_interval * sp_bonus / 100;
+		int tick = max(interval_cap, sp_interval * sp_bonus / 100);
 		regen->tick.sp += status->natural_heal_diff_tick;
 
 		if (regen->tick.sp >= tick) {
@@ -12985,7 +12989,7 @@ static int status_natural_heal(struct block_list *bl, va_list args)
 
 	if ((flag & RGN_SHP) != 0) {
 		//Skill HP regen
-		int tick = battle_config.natural_heal_skill_interval * sregen->rate.hp / 100;
+		int tick = max(battle_config.natural_heal_cap, battle_config.natural_heal_skill_interval * sregen->rate.hp / 100);
 		sregen->tick.hp += status->natural_heal_diff_tick;
 
 		while (sregen->tick.hp >= tick) {
@@ -12997,7 +13001,7 @@ static int status_natural_heal(struct block_list *bl, va_list args)
 
 	if ((flag & RGN_SSP) != 0) {
 		//Skill SP regen
-		int tick = battle_config.natural_heal_skill_interval * sregen->rate.sp / 100;
+		int tick = max(battle_config.natural_heal_cap, battle_config.natural_heal_skill_interval * sregen->rate.sp / 100);
 		sregen->tick.sp += status->natural_heal_diff_tick;
 
 		while (sregen->tick.sp >= tick) {
