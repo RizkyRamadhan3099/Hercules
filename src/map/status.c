@@ -3577,9 +3577,6 @@ static void status_calc_regen_rate_pc(struct map_session_data *sd, struct regen_
 
 	struct status_change *sc = &sd->sc;
 	if (sc->data[SC_MAGNIFICAT]) {
-#ifndef RENEWAL // HP Regen applies only in Pre-renewal
-		regen->rate.hp /= 2;
-#endif
 		regen->rate.sp /= 2;
 	}
 
