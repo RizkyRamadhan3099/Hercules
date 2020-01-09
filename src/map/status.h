@@ -1096,7 +1096,7 @@ struct regen_data {
 
 	unsigned short flag; //Marks what stuff you may heal or not.
 	unsigned short
-		hp, sp, skill_hp, skill_sp;
+		hp, sp;
 
 	//tick accumulation before healing.
 	struct {
